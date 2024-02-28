@@ -7,6 +7,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Task } from "./tasks.entity";
 import { UUID } from "typeorm/driver/mongodb/bson.typings";
 import { QueryFailedError } from "typeorm";
+import { User } from "../auth/user.entity";
 
 @Injectable()
 export class TasksService {
@@ -60,7 +61,7 @@ export class TasksService {
     }
     return task;
   }
-  async createTask(createTask: CreateTaskDTO) {
+  async createTask(createTask: CreateTaskDTO, user: User) {
     const { title, description } = createTask;
     const tasks = {
       title,
